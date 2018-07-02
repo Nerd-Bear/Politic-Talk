@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @Api(value = "Meeting", tags = "Meeting")
-public class meeting {
+public class Meeting {
 
     @ApiOperation(value = "Get Schedule", notes = "Get Schedule")
     @RequestMapping(value = "/meeting/check_schedule", method = RequestMethod.GET)
