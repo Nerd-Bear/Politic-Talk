@@ -10,21 +10,13 @@ import java.util.UUID;
 @RestController
 @Api(value = "Recall", tags = "Recall")
 public class Recall {
-    public HashMap<String, Object> getPoliticians(@RequestParam String region, @RequestParam String position, @RequestParam String name){
-        /*
-        정치인 목록을 DB에서 끌어와 리스폰스 해줌
-         */
-        HashMap<String, Object> politicianList = new HashMap<>();
-        return politicianList;
-    }
 
     @ApiOperation(value = "Post Discontent", notes = "Post Discontent")
     @RequestMapping(value = "/recall/discontent", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "region", value = "politician region", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "position", value = "politician position", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "name", value = "politician name", required = false, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "title", value = "Discontent Title", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "content", value = "Discontent Content", required = true, dataType = "string", paramType = "json")
     })
     public UUID postDiscontent(){
         /*
@@ -59,6 +51,11 @@ public class Recall {
     @ApiOperation(value = "Discontent Opinion", notes = "Add Discontent Opinion")
     @RequestMapping(value = "/recall/opinion", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "discontentId", value = "Discontent Id", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "title", value = "Discontent Title", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "content", value = "Discontent Content", required = true, dataType = "string", paramType = "json")
+    })
     public UUID discontentOpinion(){
         /*
         의견을 받고 의견을 DB에 등록 후 의견 uuid 를 리턴함
@@ -70,6 +67,10 @@ public class Recall {
     @ApiOperation(value = "Vote Discontent", notes = "Vote Discontent")
     @RequestMapping(value = "/recall/vote", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "discontentId", value = "Discontent Id", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "vote", value = "Agree(true) or Disagree(false)", required = true, dataType = "boolean", paramType = "json")
+    })
     public void voteDiscontent(){
         /*
         찬성 및 반대 DB 저장
