@@ -1,7 +1,6 @@
 package com.java_team_project.politictalk.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,12 +8,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
-@Api(value = "Recall", tags = "주민 소환제")
+@Api(value = "Recall", tags = "Recall")
 public class Recall {
-    @ApiOperation(value = "Get Politician List", notes = "정치인 목록 조회")
-    @RequestMapping(value = "/recall/politician List", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getPoliticians(@RequestParam String region, @RequestParam String position){
+    public HashMap<String, Object> getPoliticians(@RequestParam String region, @RequestParam String position, @RequestParam String name){
         /*
         정치인 목록을 DB에서 끌어와 리스폰스 해줌
          */
@@ -22,9 +18,14 @@ public class Recall {
         return politicianList;
     }
 
-    @ApiOperation(value = "Post Discontent", notes = "불만 게시글 작성")
+    @ApiOperation(value = "Post Discontent", notes = "Post Discontent")
     @RequestMapping(value = "/recall/discontent", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "region", value = "politician region", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "position", value = "politician position", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "politician name", required = false, dataType = "String", paramType = "query")
+    })
     public UUID postDiscontent(){
         /*
         불만 게시글을 DB에 저장하고 UUID를 리턴함
@@ -33,7 +34,7 @@ public class Recall {
         return discontentId;
     }
 
-    @ApiOperation(value = "Get Discontent", notes = "불만 게시글 조회")
+    @ApiOperation(value = "Get Discontent", notes = "Get Discontent")
     @RequestMapping(value = "/recall/discontent", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public HashMap<String, Object> getDiscontent(@RequestParam UUID discontentId){
@@ -44,7 +45,7 @@ public class Recall {
         return discontent;
     }
 
-    @ApiOperation(value = "Get Discontent List", notes = "불만 게시글 목록 조회")
+    @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
     @RequestMapping(value = "/recall/discontent_list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public HashMap<String, Object> getDiscontentList(@RequestParam String politicianId){
@@ -55,7 +56,7 @@ public class Recall {
         return discontentList;
     }
 
-    @ApiOperation(value = "Discontent Opinion", notes = "의견 및 증거 제시")
+    @ApiOperation(value = "Discontent Opinion", notes = "Add Discontent Opinion")
     @RequestMapping(value = "/recall/opinion", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public UUID discontentOpinion(){
@@ -66,7 +67,7 @@ public class Recall {
         return opinionId;
     }
 
-    @ApiOperation(value = "Vote Discontent", notes = "불만 게시글 찬성 및 반대")
+    @ApiOperation(value = "Vote Discontent", notes = "Vote Discontent")
     @RequestMapping(value = "/recall/vote", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void voteDiscontent(){
