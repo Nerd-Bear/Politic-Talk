@@ -1,4 +1,4 @@
-package com.politictalk.politictalk.config;
+package com.java_team_project.politictalk.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class SwaggerConfig {
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.politictalk.politictalk.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.java_team_project.politictalk.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
@@ -27,11 +27,12 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfo(
-                "Hello REST API",
-                "Some custom description of API.",
-                "API TOS",
-                "Terms of service",
-                new Contact("Nerd-Bear", "www.example.com", "python@istruly.sexy"),
-                "License of API", "API license URL", Collections.emptyList());
+                "PoliticTalk API",
+                "자바 프로젝트 PoliticTalk API",
+                "Prototype",
+                "https://github.com/Nerd-Bear/Politic-Talk",
+                new Contact("Nerd-Bear", "https://github.com/Nerd-Bear/Politic-Talk", "python@istruly.sexy"),
+                "MIT",
+                "https://opensource.org/licenses/MIT");
     }
 }

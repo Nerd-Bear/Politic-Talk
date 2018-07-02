@@ -1,4 +1,4 @@
-package com.politictalk.politictalk;
+package com.java_team_project.politictalk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

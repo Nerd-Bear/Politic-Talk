@@ -1,4 +1,4 @@
-package com.politictalk.politictalk.controller;
+package com.java_team_project.politictalk.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
