@@ -5,22 +5,25 @@ import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PolicySuggestion {
+public class Meeting {
     @Id
-    private String policySuggestionId;
+    private String meetingId;
     private String author;
     private Date date;
     private String title;
     private String content;
     private int viewCount;
-    private ArrayList<String> committee;
+    private String politicianId;
+    private Date meetingDate;
+    private ArrayList<String> participantId;
+    private boolean didPolicianRead;
 
-    public String getPolicySuggestionId() {
-        return policySuggestionId;
+    public String getMeetingId() {
+        return meetingId;
     }
 
-    public void setPolicySuggestionId(String policySuggestionId) {
-        this.policySuggestionId = policySuggestionId;
+    public void setMeetingId(String meetingId) {
+        this.meetingId = meetingId;
     }
 
     public String getAuthor() {
@@ -63,28 +66,28 @@ public class PolicySuggestion {
         this.viewCount = viewCount;
     }
 
-    public ArrayList<String> getCommittee() {
-        return committee;
+    public String getPoliticianId() {
+        return politicianId;
     }
 
-    public void setCommittee(ArrayList<String> committee) {
-        this.committee = committee;
+    public void setPoliticianId(String politicianId) {
+        this.politicianId = politicianId;
     }
 
-    public ArrayList<String> getAgree() {
-        return agree;
+    public Date getMeetingDate() {
+        return meetingDate;
     }
 
-    public void setAgree(ArrayList<String> agree) {
-        this.agree = agree;
+    public void setMeetingDate(Date meetingDate) {
+        this.meetingDate = meetingDate;
     }
 
-    public ArrayList<String> getDisagree() {
-        return disagree;
+    public ArrayList<String> getParticipantId() {
+        return participantId;
     }
 
-    public void setDisagree(ArrayList<String> disagree) {
-        this.disagree = disagree;
+    public void setParticipantId(ArrayList<String> participantId) {
+        this.participantId = participantId;
     }
 
     public boolean isDidPolicianRead() {
@@ -94,28 +97,25 @@ public class PolicySuggestion {
     public void setDidPolicianRead(boolean didPolicianRead) {
         this.didPolicianRead = didPolicianRead;
     }
-
-    private ArrayList<String> agree;
-    private ArrayList<String> disagree;
-    private boolean didPolicianRead;
 }
 
-class PolicySuggestionOpinion{
+class MeetingReview {
     @Id
-    private String suggestPolicyOpinionId;
+    private String meetingReviewId;
     private String author;
     private Date date;
     private String title;
     private String content;
     private int viewCount;
-    private String policySuggestionId;
+    private String meetingId;
+    private String politicianId;
 
-    public String getSuggestPolicyOpinionId() {
-        return suggestPolicyOpinionId;
+    public String getMeetingReviewId() {
+        return meetingReviewId;
     }
 
-    public void setSuggestPolicyOpinionId(String suggestPolicyOpinionId) {
-        this.suggestPolicyOpinionId = suggestPolicyOpinionId;
+    public void setMeetingReviewId(String meetingReviewId) {
+        this.meetingReviewId = meetingReviewId;
     }
 
     public String getAuthor() {
@@ -158,11 +158,19 @@ class PolicySuggestionOpinion{
         this.viewCount = viewCount;
     }
 
-    public String getPolicySuggestionId() {
-        return policySuggestionId;
+    public String getMeetingId() {
+        return meetingId;
     }
 
-    public void setPolicySuggestionId(String policySuggestionId) {
-        this.policySuggestionId = policySuggestionId;
+    public void setMeetingId(String meetingId) {
+        this.meetingId = meetingId;
+    }
+
+    public String getPoliticianId() {
+        return politicianId;
+    }
+
+    public void setPoliticianId(String politicianId) {
+        this.politicianId = politicianId;
     }
 }

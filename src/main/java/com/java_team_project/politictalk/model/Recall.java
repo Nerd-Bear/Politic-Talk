@@ -2,25 +2,24 @@ package com.java_team_project.politictalk.model;
 
 import org.springframework.data.annotation.Id;
 
-import java.util.ArrayList;
 import java.util.Date;
 
-public class PolicySuggestion {
+public class Recall {
     @Id
-    private String policySuggestionId;
+    private String recallId;
     private String author;
     private Date date;
     private String title;
     private String content;
     private int viewCount;
-    private ArrayList<String> committee;
+    private String politicianId;
 
-    public String getPolicySuggestionId() {
-        return policySuggestionId;
+    public String getRecallId() {
+        return recallId;
     }
 
-    public void setPolicySuggestionId(String policySuggestionId) {
-        this.policySuggestionId = policySuggestionId;
+    public void setRecallId(String recallId) {
+        this.recallId = recallId;
     }
 
     public String getAuthor() {
@@ -63,59 +62,31 @@ public class PolicySuggestion {
         this.viewCount = viewCount;
     }
 
-    public ArrayList<String> getCommittee() {
-        return committee;
+    public String getPoliticianId() {
+        return politicianId;
     }
 
-    public void setCommittee(ArrayList<String> committee) {
-        this.committee = committee;
+    public void setPoliticianId(String politicianId) {
+        this.politicianId = politicianId;
     }
-
-    public ArrayList<String> getAgree() {
-        return agree;
-    }
-
-    public void setAgree(ArrayList<String> agree) {
-        this.agree = agree;
-    }
-
-    public ArrayList<String> getDisagree() {
-        return disagree;
-    }
-
-    public void setDisagree(ArrayList<String> disagree) {
-        this.disagree = disagree;
-    }
-
-    public boolean isDidPolicianRead() {
-        return didPolicianRead;
-    }
-
-    public void setDidPolicianRead(boolean didPolicianRead) {
-        this.didPolicianRead = didPolicianRead;
-    }
-
-    private ArrayList<String> agree;
-    private ArrayList<String> disagree;
-    private boolean didPolicianRead;
 }
 
-class PolicySuggestionOpinion{
+class RecallOpinion {
     @Id
-    private String suggestPolicyOpinionId;
+    private String recallOpinionId;
     private String author;
     private Date date;
     private String title;
     private String content;
     private int viewCount;
-    private String policySuggestionId;
+    private String recallId;
 
-    public String getSuggestPolicyOpinionId() {
-        return suggestPolicyOpinionId;
+    public String getRecallOpinionId() {
+        return recallOpinionId;
     }
 
-    public void setSuggestPolicyOpinionId(String suggestPolicyOpinionId) {
-        this.suggestPolicyOpinionId = suggestPolicyOpinionId;
+    public void setRecallOpinionId(String recallOpinionId) {
+        this.recallOpinionId = recallOpinionId;
     }
 
     public String getAuthor() {
@@ -158,11 +129,11 @@ class PolicySuggestionOpinion{
         this.viewCount = viewCount;
     }
 
-    public String getPolicySuggestionId() {
-        return policySuggestionId;
+    public String getRecallId() {
+        return recallId;
     }
 
-    public void setPolicySuggestionId(String policySuggestionId) {
-        this.policySuggestionId = policySuggestionId;
+    public void setRecallId(String recallId) {
+        this.recallId = recallId;
     }
 }

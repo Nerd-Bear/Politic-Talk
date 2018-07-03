@@ -16,7 +16,7 @@ import java.util.Collections;
 @EnableSwagger2
 public class SwaggerConfig {
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.java_team_project.politictalk.controller"))
@@ -25,7 +25,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfo(
                 "PoliticTalk API",
                 "자바 프로젝트 PoliticTalk API",
