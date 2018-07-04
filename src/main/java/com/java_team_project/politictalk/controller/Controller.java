@@ -12,7 +12,7 @@ public class Controller {
     @ApiOperation(value = "isServerRunning", notes = "서버가 실행되고 있는지 확인하는 API", tags = "Test")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public String isServerRunning(){
+    public String isServerRunning() {
         return "Yes, It's running!! You are so great!";
     }
 }

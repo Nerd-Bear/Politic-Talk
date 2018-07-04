@@ -16,7 +16,7 @@ public class CommitteList {
     @ApiOperation(value = "Get Committee List", notes = "Get Committee List")
     @RequestMapping(value = "/suggest_policy/committee", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getCommitteeList(){
+    public HashMap<String, Object> getCommitteeList() {
         /*
         위원회 리스트 리턴
          */

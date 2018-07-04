@@ -20,7 +20,7 @@ public class PoliticianList {
             @ApiImplicitParam(name = "position", value = "politician position", required = false, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "name", value = "politician name", required = false, dataType = "String", paramType = "query")
     })
-    public HashMap<String, Object> getPoliticians(@RequestParam String region, @RequestParam String position, @RequestParam String name){
+    public HashMap<String, Object> getPoliticians(@RequestParam String region, @RequestParam String position, @RequestParam String name) {
         /*
         정치인 목록을 DB에서 끌어와 리스폰스 해줌
          */

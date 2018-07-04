@@ -21,7 +21,7 @@ public class RecallPost {
             @ApiImplicitParam(name = "content", value = "Discontent Content", required = true, dataType = "string", paramType = "json")
     })
 
-    public UUID postDiscontent(){
+    public UUID postDiscontent() {
         /*
         불만 게시글을 DB에 저장하고 UUID를 리턴함
          */
@@ -32,7 +32,7 @@ public class RecallPost {
     @ApiOperation(value = "Get Discontent", notes = "Get Discontent")
     @RequestMapping(value = "/recall/discontent", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getDiscontent(@RequestParam UUID discontentId){
+    public HashMap<String, Object> getDiscontent(@RequestParam UUID discontentId) {
         /*
         불만 게시글 id를 받아 DB에서 찾아서 게시글에 대한 내용을 리턴함
          */
@@ -43,7 +43,7 @@ public class RecallPost {
     @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
     @RequestMapping(value = "/recall/discontent_list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getDiscontentList(@RequestParam String politicianId){
+    public HashMap<String, Object> getDiscontentList(@RequestParam String politicianId) {
         /*
         정치인 id를 받아 그 정치인에 대한 불만 게시글 목록을 리턴함
          */
