@@ -2,11 +2,13 @@ package com.java_team_project.politictalk.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 @Data
+@Document(collection = "policy_suggestion")
 public class PolicySuggestion {
     @Id
     private String policySuggestionId;
@@ -22,6 +24,7 @@ public class PolicySuggestion {
 }
 
 @Data
+@Document(collection = "policy_suggestion_opinion")
 class PolicySuggestionOpinion{
     @Id
     private String suggestPolicyOpinionId;

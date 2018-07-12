@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Data
+@Document(collection = "recall")
 public class Recall {
     @Id
     private String recallId;
@@ -21,6 +23,7 @@ public class Recall {
 }
 
 @Data
+@Document(collection = "recall_opinion")
 class RecallOpinion {
     @Id
     private String recallOpinionId;

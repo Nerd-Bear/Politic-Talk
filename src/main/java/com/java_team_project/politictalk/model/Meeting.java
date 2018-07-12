@@ -2,11 +2,13 @@ package com.java_team_project.politictalk.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 @Data
+@Document(collection = "meeting")
 public class Meeting {
     @Id
     private String meetingId;
@@ -22,6 +24,7 @@ public class Meeting {
 }
 
 @Data
+@Document(collection = "meeting_review")
 class MeetingReview {
     @Id
     private String meetingReviewId;

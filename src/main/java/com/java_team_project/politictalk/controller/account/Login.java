@@ -1,9 +1,6 @@
 package com.java_team_project.politictalk.controller.account;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +16,9 @@ public class Login {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "User ID", required = true, dataType = "string", paramType = "json"),
             @ApiImplicitParam(name = "password", value = "User password", required = true, dataType = "string", paramType = "json")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "login success", )
     })
     public String login() {
         /*
