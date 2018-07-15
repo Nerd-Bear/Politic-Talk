@@ -19,11 +19,11 @@ public class Signup {
     @RequestMapping(value = "/account/signup", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "User ID", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "password", value = "User password", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "name", value = "User name", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "bitrhDay", value = "User birth day", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "region", value = "User region", required = true, dataType = "string", paramType = "json")
+            @ApiImplicitParam(name = "id", value = "Account ID", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "password", value = "Account password", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "name", value = "Account name", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "bitrhDay", value = "Account birth day", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "region", value = "Account region", required = true, dataType = "string", paramType = "json")
     })
     public UUID signup() {
         /*

@@ -14,8 +14,8 @@ public class Login {
     @RequestMapping(value = "/account/login", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "User ID", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "password", value = "User password", required = true, dataType = "string", paramType = "json")
+            @ApiImplicitParam(name = "id", value = "Account ID", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "password", value = "Account password", required = true, dataType = "string", paramType = "json")
     })
     @ApiResponses({
             @ApiResponse(code = 200, message = "login success", )

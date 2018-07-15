@@ -1,4 +1,4 @@
-package com.java_team_project.politictalk.model;
+package com.java_team_project.politictalk.model.meeting;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
