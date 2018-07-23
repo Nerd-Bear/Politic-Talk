@@ -1,4 +1,4 @@
-package com.java_team_project.politictalk.model;
+package com.java_team_project.politictalk.model.recall;
 
 import lombok.Data;
 import lombok.Getter;
