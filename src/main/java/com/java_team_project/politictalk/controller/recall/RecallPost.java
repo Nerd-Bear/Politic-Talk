@@ -42,7 +42,7 @@ public class RecallPost {
     }
 
     @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
-    @RequestMapping(value = "/recall/discontent_list", method = RequestMethod.GET)
+    @RequestMapping(value = "/recall/discontent/list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public HashMap<String, Object> getDiscontentList() {
         /*
@@ -53,7 +53,7 @@ public class RecallPost {
     }
 
     @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
-    @RequestMapping(value = "/recall/discontent_list", method = RequestMethod.GET)
+    @RequestMapping(value = "/recall/discontent/list/politician", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public HashMap<String, Object> getDiscontentListByPoliticianId(@RequestParam String politicianId) {
         /*
