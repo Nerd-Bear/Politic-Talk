@@ -19,7 +19,7 @@ public class SuggestPolicyPost {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "title", value = "Suggest Policy Title", required = true, dataType = "string", paramType = "json"),
             @ApiImplicitParam(name = "content", value = "Suggest Policy Content", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "committee", value = "Committee to Suggest Policy", required = true, dataType = "string", paramType = "json")
+            @ApiImplicitParam(name = "Committee", value = "Committee to Suggest Policy", required = true, dataType = "string", paramType = "json")
     })
     public UUID postSuggestPolicy() {
         /*
