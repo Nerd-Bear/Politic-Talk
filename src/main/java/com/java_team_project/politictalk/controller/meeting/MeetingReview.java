@@ -41,6 +41,17 @@ public class MeetingReview {
         return map;
     }
 
+    @ApiOperation(value = "Get Meeting Review List by meeting id", notes = "Get Meeting Review List")
+    @RequestMapping(value = "/meeting/review/list/meeting", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public HashMap<String, Object> getMeetingReviewListByMeetingId(@RequestParam String meetingId) {
+        /*
+        해당 정치인과의 미팅 후기 리스트 리턴
+         */
+        HashMap<String, Object> map = new HashMap<>();
+        return map;
+    }
+
     @ApiOperation(value = "Get Meeting Review", notes = "Get Meeting Review")
     @RequestMapping(value = "/meeting/review", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)

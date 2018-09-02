@@ -1,9 +1,6 @@
 package com.java_team_project.politictalk.controller.account;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,8 +19,12 @@ public class Signup {
             @ApiImplicitParam(name = "id", value = "Account ID", required = true, dataType = "string", paramType = "json"),
             @ApiImplicitParam(name = "password", value = "Account password", required = true, dataType = "string", paramType = "json"),
             @ApiImplicitParam(name = "name", value = "Account name", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "bitrhDay", value = "Account birth day", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "region", value = "Account region", required = true, dataType = "string", paramType = "json")
+            @ApiImplicitParam(name = "bitrhDay", value = "Account birth day (yyyy-mm-dd)", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "region", value = "Account region", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "email", value = "Account email", required = true, dataType = "string", paramType = "json")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "signup success")
     })
     public UUID signup() {
         /*

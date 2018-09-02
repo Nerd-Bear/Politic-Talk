@@ -41,6 +41,17 @@ public class MeetingPost {
         return map;
     }
 
+    @ApiOperation(value = "Get Meeting List", notes = "Get Meeting List")
+    @RequestMapping(value = "/meeting/list", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public HashMap<String, Object> getMeetingList() {
+        /*
+        미팅 리스트
+         */
+        HashMap<String, Object> map = new HashMap<>();
+        return map;
+    }
+
     @ApiOperation(value = "Get Meeting List by Politician Id", notes = "Get Meeting List")
     @RequestMapping(value = "/meeting/list/politician", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)

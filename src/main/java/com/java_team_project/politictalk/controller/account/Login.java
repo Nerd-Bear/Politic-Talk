@@ -18,7 +18,7 @@ public class Login {
             @ApiImplicitParam(name = "password", value = "Account password", required = true, dataType = "string", paramType = "json")
     })
     @ApiResponses({
-            @ApiResponse(code = 200, message = "login success", )
+            @ApiResponse(code = 200, message = "login success")
     })
     public String login() {
         /*

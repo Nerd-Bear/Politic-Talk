@@ -13,14 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(value = "SuggestPolicy", tags = "SuggestPolicy")
 public class SuggestPolicyVote {
-    @ApiOperation(value = "Vote Policy Suggestion", notes = "Vote Policy Suggestion")
-    @RequestMapping(value = "/suggest_policy/vote", method = RequestMethod.POST)
+    @ApiOperation(value = "Approve Policy Suggestion", notes = "Vote Policy Suggestion")
+    @RequestMapping(value = "/suggest_policy/vote", method = RequestMethod.PATCH)
     @ResponseStatus(HttpStatus.CREATED)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "suggestPolicyId", value = "SuggestPolicy Id", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "vote", value = "Agree(true) or Disagree(false)", required = true, dataType = "boolean", paramType = "json")
+            @ApiImplicitParam(name = "suggestPolicyId", value = "SuggestPolicy Id", required = true, dataType = "string", paramType = "json")
     })
-    public void votePolicySuggestion() {
+    public void approvePolicySuggestion() {
+        /*
+        찬성 및 반대 DB 저장
+         */
+    }
+
+    @ApiOperation(value = "Dispprove Policy Suggestion", notes = "Vote Policy Suggestion")
+    @RequestMapping(value = "/suggest_policy/vote", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "suggestPolicyId", value = "SuggestPolicy Id", required = true, dataType = "string", paramType = "json")
+    })
+    public void disapprovePolicySuggestion() {
         /*
         찬성 및 반대 DB 저장
          */

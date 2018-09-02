@@ -13,16 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(value = "Recall", tags = "Recall")
 public class RecallVote {
-    @ApiOperation(value = "Vote Discontent", notes = "Vote Discontent")
-    @RequestMapping(value = "/recall/vote", method = RequestMethod.POST)
+    @ApiOperation(value = "Approve Discontent", notes = "Vote Discontent")
+    @RequestMapping(value = "/recall/vote", method = RequestMethod.PATCH)
     @ResponseStatus(HttpStatus.CREATED)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "discontentId", value = "Discontent Id", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "vote", value = "Agree(true) or Disagree(false)", required = true, dataType = "boolean", paramType = "json")
+            @ApiImplicitParam(name = "discontentId", value = "Discontent Id", required = true, dataType = "string", paramType = "json")
     })
-    public void voteDiscontent() {
+    public void approveDiscontent() {
         /*
-        찬성 및 반대 DB 저장
+        불만 게시글 찬성 DB 저장
+         */
+    }
+
+    @ApiOperation(value = "Disapprove Discontent", notes = "Vote Discontent")
+    @RequestMapping(value = "/recall/vote", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "discontentId", value = "Discontent Id", required = true, dataType = "string", paramType = "json")
+    })
+    public void disapproveDiscontent() {
+        /*
+        불만 게시글 반대 db 저장
          */
     }
 }

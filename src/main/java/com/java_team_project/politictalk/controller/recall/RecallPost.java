@@ -18,7 +18,8 @@ public class RecallPost {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "title", value = "Discontent Title", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "content", value = "Discontent Content", required = true, dataType = "string", paramType = "json")
+            @ApiImplicitParam(name = "content", value = "Discontent Content", required = true, dataType = "string", paramType = "json"),
+            @ApiImplicitParam(name = "politicianId", value = "Politician Id", required = true, dataType = "string", paramType = "json")
     })
 
     public UUID postDiscontent() {
@@ -43,7 +44,18 @@ public class RecallPost {
     @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
     @RequestMapping(value = "/recall/discontent_list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getDiscontentList(@RequestParam String politicianId) {
+    public HashMap<String, Object> getDiscontentList() {
+        /*
+        불만 게시글 목록을 리턴함
+         */
+        HashMap<String, Object> discontentList = new HashMap<>();
+        return discontentList;
+    }
+
+    @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
+    @RequestMapping(value = "/recall/discontent_list", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public HashMap<String, Object> getDiscontentListByPoliticianId(@RequestParam String politicianId) {
         /*
         정치인 id를 받아 그 정치인에 대한 불만 게시글 목록을 리턴함
          */
