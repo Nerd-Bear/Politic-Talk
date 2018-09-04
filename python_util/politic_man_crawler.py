@@ -32,7 +32,7 @@ def crawl(num, city_name='none'):
 
         temp['시도명'] = city_name
         result.append(temp)
-    with open('info_nec_{}_{}'.format(num, city_name), 'w', encoding='UTF-8') as f:
+    with open('politic_man_data\\info_nec_{}_{}'.format(num, city_name), 'w', encoding='UTF-8') as f:
         f.write(json.dumps(result))
 
 
