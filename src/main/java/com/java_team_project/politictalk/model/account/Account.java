@@ -9,19 +9,19 @@ import java.util.Date;
 @Document(collection = "user")
 public class Account {
     @Id
-    private String id;
+    private String userId;
     private String password;
     private String name;
     private Date birthDay;
     private String region;
     private String email;
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {

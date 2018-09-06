@@ -27,9 +27,9 @@ public class Login {
             @ApiResponse(code = 200, message = "login success")
     })
     public String login(@RequestBody @Valid final AccountLongin accountLongin) {
-        Account account = accountRepository.findOne(accountLongin.getId());
-        if(account.getPassword() == accountLongin.getPassword()){
-            return account.getId();
+        Account account = accountRepository.findByUserId(accountLongin.getId());
+        if(account.getPassword().equals(accountLongin.getPassword())){
+            return account.getUserId();
         }
         else{
             return "Fail";
