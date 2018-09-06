@@ -19,13 +19,6 @@ public class Login {
     @ApiOperation(value = "Log in", notes = "Log in")
     @RequestMapping(value = "/account/login", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "Account ID", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "password", value = "Account password", required = true, dataType = "string", paramType = "json")
-    })
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "login success")
-    })
     public String login(@RequestBody @Valid final AccountLongin accountLongin) {
         Account account = accountRepository.findByUserId(accountLongin.getId());
         if(account.getPassword().equals(accountLongin.getPassword())){
