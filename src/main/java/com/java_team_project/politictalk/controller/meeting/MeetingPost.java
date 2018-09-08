@@ -1,9 +1,13 @@
 package com.java_team_project.politictalk.controller.meeting;
 
+import com.java_team_project.politictalk.exception.ExistIdException;
+import com.java_team_project.politictalk.model.meeting.Meeting;
+import com.java_team_project.politictalk.model.meeting.MeetingRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,21 +17,17 @@ import java.util.UUID;
 @RestController
 @Api(value = "Meeting", tags = "Meeting")
 public class MeetingPost {
+    @Autowired
+    MeetingRepository meetingRepository;
     @ApiOperation(value = "Post Meeting", notes = "Post Meeting")
     @RequestMapping(value = "/meeting", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "title", value = "Meeting post Title", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "content", value = "Meeting post content", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "date", value = "Meeting date (form 'yyyy-mm-dd')", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "maxNumber", value = "Max number of people", required = true, dataType = "int", paramType = "json")
-    })
-    public UUID postMeeting() {
-        /*
-        미팅 모집글 작성한 것을 DB에 저장 후 게시글의 id 리턴
-         */
-        UUID meetingId = UUID.randomUUID();
-        return meetingId;
+    public UUID postMeeting(@RequestBody final Meeting meeting) {
+        if (meetingRepository.findByMeetingId(meeting.getMeetingId()) != null){
+            throw new ExistIdException();
+        }
+        meetingRepository.save(meeting);
+        return meeting.getMeetingId();
     }
 
     @ApiOperation(value = "Get Meeting ", notes = "Get Meeting")
@@ -72,5 +72,11 @@ public class MeetingPost {
          */
         HashMap<String, Object> map = new HashMap<>();
         return map;
+    }
+
+    @ExceptionHandler(ExistIdException.class)
+    @ResponseStatus(HttpStatus.RESET_CONTENT)
+    public void ExistMeetingId(){
+
     }
 }
