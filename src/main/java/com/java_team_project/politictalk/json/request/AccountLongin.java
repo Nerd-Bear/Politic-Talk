@@ -1,4 +1,4 @@
-package com.java_team_project.politictalk.json;
+package com.java_team_project.politictalk.json.request;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

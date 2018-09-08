@@ -1,6 +1,6 @@
 package com.java_team_project.politictalk.controller.account;
 
-import com.java_team_project.politictalk.json.AccountLongin;
+import com.java_team_project.politictalk.json.request.AccountLongin;
 import com.java_team_project.politictalk.model.account.Account;
 import com.java_team_project.politictalk.model.account.AccountRepository;
 import io.swagger.annotations.*;
@@ -21,11 +21,16 @@ public class Login {
     @ResponseStatus(HttpStatus.OK)
     public String login(@RequestBody @Valid final AccountLongin accountLongin) {
         Account account = accountRepository.findByUserId(accountLongin.getId());
-        if(account.getPassword().equals(accountLongin.getPassword())){
+        if (account.getPassword().equals(accountLongin.getPassword())) {
             return account.getUserId();
+        } else {
+            throw new NullPointerException();
         }
-        else{
-            return "Fail";
-        }
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ExceptionHandler(NullPointerException.class)
+    public void loginFailed() {
+
     }
 }
