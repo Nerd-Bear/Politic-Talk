@@ -22,11 +22,10 @@ public class Signup {
     @ResponseStatus(HttpStatus.CREATED)
     public UUID signup(@RequestBody @Valid final Account account) {
 
-        accountRepository.save(account);
-        if(accountRepository.findByUserId(account.getUserId()) != null ||
-                accountRepository.findByUserId(account.getEmail()) != null){
+        if(accountRepository.findByUserId(account.getUserId()) != null || accountRepository.findByEmail(account.getEmail()) != null){
             throw new ExistAccountException();
         }
+        accountRepository.save(account);
 
         UUID userId = UUID.randomUUID();
         return userId;
