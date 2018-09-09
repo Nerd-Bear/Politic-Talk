@@ -1,6 +1,7 @@
 package com.java_team_project.politictalk.controller.meeting;
 
 import com.java_team_project.politictalk.exception.ExistIdException;
+import com.java_team_project.politictalk.exception.NonexistIdException;
 import com.java_team_project.politictalk.model.meeting.Meeting;
 import com.java_team_project.politictalk.model.meeting.MeetingRepository;
 import io.swagger.annotations.Api;
@@ -31,12 +32,14 @@ public class MeetingPost {
     @ApiOperation(value = "Get Meeting ", notes = "Get Meeting")
     @RequestMapping(value = "/meeting", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getMeeting(@RequestParam String meetingId) {
-        /*
-        미팅 게시글 정보 리턴
-         */
-        HashMap<String, Object> map = new HashMap<>();
-        return map;
+    public Meeting getMeeting(@RequestParam String meetingId) {
+
+        Meeting meeting = meetingRepository.findByMeetingId(meetingId);
+        if(meeting == null){
+            throw new NonexistIdException();
+        }
+
+        return meeting;
     }
 
     @ApiOperation(value = "Get Meeting List", notes = "Get Meeting List")
@@ -75,6 +78,12 @@ public class MeetingPost {
     @ExceptionHandler(ExistIdException.class)
     @ResponseStatus(HttpStatus.RESET_CONTENT)
     public void ExistMeetingId(){
+
+    }
+
+    @ExceptionHandler(NonexistIdException.class)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void NonexistMeetingId(){
 
     }
 }
