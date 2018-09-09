@@ -49,10 +49,22 @@ public class MeetingJoin {
     @ApiOperation(value = "Cancel Meeting Join", notes = "Cancel Meeting Join")
     @RequestMapping(value = "/meeting/join", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void quitMeeting(@RequestParam String meetingId) {
-        /*
-        미팅 참가 취소
-         */
+    public void quitMeeting(@RequestBody MeetingJoinRequest meetingJoinRequest) {
+
+        Account user = accountRepository.findByUserId(meetingJoinRequest.getUserId());
+        Meeting meeting = meetingRepository.findByMeetingId(meetingJoinRequest.getMeetingId());
+        if(user == null || meeting == null){
+            throw new NoContentException();
+        }
+
+        List<String> participants = meeting.getParticipantId();
+        if(!participants.contains(user.getUserId())){
+            throw new ResetContentException();
+        }
+
+        participants.remove(user.getUserId());
+        meetingRepository.save(meeting);
+
     }
 
     @ExceptionHandler(NoContentException.class)
