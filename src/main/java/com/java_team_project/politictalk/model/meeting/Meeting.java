@@ -10,24 +10,36 @@ import java.util.UUID;
 @Document(collection = "meeting")
 public class Meeting {
     @Id
-    private UUID meetingId = UUID.randomUUID();
-    private String author;
-    private Date date;
-    private String title;
-    private String content;
+    private String meetingId;
+    private Date date = new Date();
     private int viewCount = 0;
-    private UUID politicianId;
-    private Date meetingDate;
     private ArrayList<String> participantId = new ArrayList<String>();
     private boolean didPoliticianRead = false;
+    private String author;
+    private String title;
+    private String content;
+    private String politicianId;
+    private Date meetingDate;
     private String region;
 
-    public UUID getMeetingId() {
+    public String getMeetingId() {
         return meetingId;
     }
 
-    public void setMeetingId(UUID meetingId) {
-        this.meetingId = meetingId;
+    public Date getDate() {
+        return date;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public ArrayList<String> getParticipantId() {
+        return participantId;
+    }
+
+    public boolean isDidPoliticianRead() {
+        return didPoliticianRead;
     }
 
     public String getAuthor() {
@@ -36,14 +48,6 @@ public class Meeting {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getTitle() {
@@ -62,19 +66,11 @@ public class Meeting {
         this.content = content;
     }
 
-    public int getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(int viewCount) {
-        this.viewCount = viewCount;
-    }
-
-    public UUID getPoliticianId() {
+    public String getPoliticianId() {
         return politicianId;
     }
 
-    public void setPoliticianId(UUID politicianId) {
+    public void setPoliticianId(String politicianId) {
         this.politicianId = politicianId;
     }
 
@@ -84,22 +80,6 @@ public class Meeting {
 
     public void setMeetingDate(Date meetingDate) {
         this.meetingDate = meetingDate;
-    }
-
-    public ArrayList<String> getParticipantId() {
-        return participantId;
-    }
-
-    public void setParticipantId(ArrayList<String> participantId) {
-        this.participantId = participantId;
-    }
-
-    public boolean isDidPoliticianRead() {
-        return didPoliticianRead;
-    }
-
-    public void setDidPoliticianRead(boolean didPoliticianRead) {
-        this.didPoliticianRead = didPoliticianRead;
     }
 
     public String getRegion() {

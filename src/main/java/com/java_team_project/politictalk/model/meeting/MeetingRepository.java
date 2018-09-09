@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.UUID;
 
 public interface MeetingRepository extends MongoRepository<Meeting, String> {
-    Meeting findByMeetingId(UUID meetingId);
+    Meeting findByMeetingId(String meetingId);
 }

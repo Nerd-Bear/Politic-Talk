@@ -4,8 +4,6 @@ import com.java_team_project.politictalk.exception.ExistIdException;
 import com.java_team_project.politictalk.model.meeting.Meeting;
 import com.java_team_project.politictalk.model.meeting.MeetingRepository;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +20,7 @@ public class MeetingPost {
     @ApiOperation(value = "Post Meeting", notes = "Post Meeting")
     @RequestMapping(value = "/meeting", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public UUID postMeeting(@RequestBody final Meeting meeting) {
+    public String postMeeting(@RequestBody final Meeting meeting) {
         if (meetingRepository.findByMeetingId(meeting.getMeetingId()) != null){
             throw new ExistIdException();
         }
