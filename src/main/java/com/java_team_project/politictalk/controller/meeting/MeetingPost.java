@@ -58,23 +58,27 @@ public class MeetingPost {
     @ApiOperation(value = "Get Meeting List by Politician Id", notes = "Get Meeting List")
     @RequestMapping(value = "/meeting/list/politician", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getMeetingListByPoliticianId(@RequestParam String politicianId) {
-        /*
-        국회의원별 미팅 리스트
-         */
-        HashMap<String, Object> map = new HashMap<>();
-        return map;
+    public List<Meeting> getMeetingListByPoliticianId(@RequestParam String politicianId) {
+
+        List<Meeting> meetings = meetingRepository.findByPoliticianId(politicianId);
+        if(meetings == null || meetings.size() == 0){
+            throw new NoContentException();
+        }
+
+        return meetings;
     }
 
     @ApiOperation(value = "Get Meeting List by Region", notes = "Get Meeting List")
     @RequestMapping(value = "/meeting/list/region", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getMeetingListByRegion(@RequestParam String region) {
-        /*
-        지역별 미팅 리스트
-         */
-        HashMap<String, Object> map = new HashMap<>();
-        return map;
+    public List<Meeting> getMeetingListByRegion(@RequestParam String region) {
+
+        List<Meeting> meetings = meetingRepository.findByRegion(region);
+        if(meetings == null || meetings.size() == 0){
+            throw new NoContentException();
+        }
+
+        return meetings;
     }
 
     @ExceptionHandler(ExistIdException.class)
