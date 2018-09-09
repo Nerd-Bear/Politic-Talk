@@ -1,7 +1,7 @@
 package com.java_team_project.politictalk.controller.meeting;
 
 import com.java_team_project.politictalk.exception.ExistIdException;
-import com.java_team_project.politictalk.exception.NonexistIdException;
+import com.java_team_project.politictalk.exception.NoContentException;
 import com.java_team_project.politictalk.model.meeting.Meeting;
 import com.java_team_project.politictalk.model.meeting.MeetingRepository;
 import io.swagger.annotations.Api;
@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.List;
 
 @RestController
 @Api(value = "Meeting", tags = "Meeting")
@@ -36,7 +36,7 @@ public class MeetingPost {
 
         Meeting meeting = meetingRepository.findByMeetingId(meetingId);
         if(meeting == null){
-            throw new NonexistIdException();
+            throw new NoContentException();
         }
 
         return meeting;
@@ -45,12 +45,14 @@ public class MeetingPost {
     @ApiOperation(value = "Get Meeting List", notes = "Get Meeting List")
     @RequestMapping(value = "/meeting/list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getMeetingList() {
-        /*
-        미팅 리스트
-         */
-        HashMap<String, Object> map = new HashMap<>();
-        return map;
+    public List<Meeting> getMeetingList() {
+
+        List<Meeting> meetings = meetingRepository.findAll();
+        if(meetings == null || meetings.size() == 0){
+            throw new NoContentException();
+        }
+
+        return meetings;
     }
 
     @ApiOperation(value = "Get Meeting List by Politician Id", notes = "Get Meeting List")
@@ -81,9 +83,9 @@ public class MeetingPost {
 
     }
 
-    @ExceptionHandler(NonexistIdException.class)
+    @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void NonexistMeetingId(){
+    public void NonContent(){
 
     }
 }
