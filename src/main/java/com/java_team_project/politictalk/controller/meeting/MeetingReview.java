@@ -1,33 +1,36 @@
 package com.java_team_project.politictalk.controller.meeting;
 
+import com.java_team_project.politictalk.model.meeting.MeetingReviewRepository;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
 @Api(value = "Meeting", tags = "Meeting")
 public class MeetingReview {
+
+    @Autowired
+    MeetingReviewRepository meetingReviewRepository;
+
     @ApiOperation(value = "Review Meeting", notes = "Review Meeting")
     @RequestMapping(value = "/meeting/review", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "title", value = "Meeting post Title", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "content", value = "Meeting post content", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "date", value = "Meeting date (form 'yyyy-mm-dd')", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "meetingId", value = "Meeting Id", required = true, dataType = "string", paramType = "json")
-    })
-    public UUID postMeetingReview() {
-        /*
-        미팅 후기 작성한 것을 DB에 저장 후 게시글의 id 리턴
-         */
-        UUID meetingReaviewId = UUID.randomUUID();
-        return meetingReaviewId;
+    public String postMeetingReview(@RequestBody com.java_team_project.politictalk.model.meeting.MeetingReview meetingReview) {
+        String meetingReviewId = UUID.randomUUID().toString();
+
+        meetingReview.setDate(new Date());
+        meetingReview.setMeetingId(meetingReviewId);
+        meetingReview.setViewCount(0);
+
+        meetingReviewRepository.save(meetingReview);
+
+        return meetingReviewId;
     }
 
     @ApiOperation(value = "Get Meeting Review List", notes = "Get Meeting Review List")
