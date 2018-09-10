@@ -1,33 +1,35 @@
 package com.java_team_project.politictalk.controller.recall;
 
+import com.java_team_project.politictalk.model.recall.Recall;
+import com.java_team_project.politictalk.model.recall.RecallRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
 @Api(value = "Recall", tags = "Recall")
 public class RecallPost {
-    @ApiOperation(value = "Post Discontent", notes = "Post Discontent")
-    @RequestMapping(value = "/recall/discontent", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "title", value = "Discontent Title", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "content", value = "Discontent Content", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "politicianId", value = "Politician Id", required = true, dataType = "string", paramType = "json")
-    })
 
-    public UUID postDiscontent() {
-        /*
-        불만 게시글을 DB에 저장하고 UUID를 리턴함
-         */
-        UUID discontentId = UUID.randomUUID();
-        return discontentId;
+    @Autowired
+    RecallRepository recallRepository;
+
+    @ApiOperation(value = "Post Recall", notes = "Post Recall")
+    @RequestMapping(value = "/recall", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public String postRecall(@RequestBody @Valid final Recall recall) {
+
+        recall.init();
+        recallRepository.save(recall);
+
+        return recall.getRecallId();
     }
 
     @ApiOperation(value = "Get Discontent", notes = "Get Discontent")
