@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -46,26 +47,30 @@ public class RecallPost {
         return recall;
     }
 
-    @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
-    @RequestMapping(value = "/recall/discontent/list", method = RequestMethod.GET)
+    @ApiOperation(value = "Get Recall List", notes = "Get Recall List")
+    @RequestMapping(value = "/recall/list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getDiscontentList() {
-        /*
-        불만 게시글 목록을 리턴함
-         */
-        HashMap<String, Object> discontentList = new HashMap<>();
-        return discontentList;
+    public List<Recall> getRecallList() {
+
+        List<Recall> recalls = recallRepository.findAll();
+        if(recalls == null || recalls.size() == 0){
+            throw new NoContentException();
+        }
+
+        return recalls;
     }
 
-    @ApiOperation(value = "Get Discontent List", notes = "Get Discontent List")
-    @RequestMapping(value = "/recall/discontent/list/politician", method = RequestMethod.GET)
+    @ApiOperation(value = "Get Recall List by politician id", notes = "Get Recall List")
+    @RequestMapping(value = "/recall/list/politician", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getDiscontentListByPoliticianId(@RequestParam String politicianId) {
-        /*
-        정치인 id를 받아 그 정치인에 대한 불만 게시글 목록을 리턴함
-         */
-        HashMap<String, Object> discontentList = new HashMap<>();
-        return discontentList;
+    public List<Recall> getRecallListByPoliticianId(@RequestParam String politicianId) {
+
+        List<Recall> recalls = recallRepository.findAllByPoliticianId(politicianId);
+        if(recalls == null || recalls.size() == 0){
+            throw new NoContentException();
+        }
+
+        return recalls;
     }
 
     @ExceptionHandler(NoContentException.class)
