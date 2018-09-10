@@ -9,14 +9,14 @@ import java.util.UUID;
 @Document(collection = "meeting_review")
 public class MeetingReview {
     @Id
+    private String meetingReviewId;
+    private String politicianId;
     private String author;
     private String title;
     private String content;
     private String meetingId;
-    private String meetingReviewId;
     private Date date;
     private int viewCount;
-    private String politicianId;
 
     public String getPoliticianId() {
         return politicianId;
