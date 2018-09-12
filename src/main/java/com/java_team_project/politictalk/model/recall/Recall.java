@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -20,12 +21,34 @@ public class Recall {
     private String content;
     private int viewCount;
     private String politicianId;
+    private ArrayList<String> approve;
+    private ArrayList<String> disApprove;
 
     public void init(){
         this.recallId = UUID.randomUUID().toString();
         this.date = new Date();
         this.viewCount = 0;
+
+        this.approve = new ArrayList<String>();
+        this.disApprove = new ArrayList<String>();
     }
+
+    public ArrayList<String> getApprove() {
+        return approve;
+    }
+
+    public void setApprove(ArrayList<String> approve) {
+        this.approve = approve;
+    }
+
+    public ArrayList<String> getDisApprove() {
+        return disApprove;
+    }
+
+    public void setDisApprove(ArrayList<String> disApprove) {
+        this.disApprove = disApprove;
+    }
+
     public String getRecallId() {
         return recallId;
     }

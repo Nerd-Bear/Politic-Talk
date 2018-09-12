@@ -1,39 +1,57 @@
 package com.java_team_project.politictalk.controller.recall;
 
+import com.java_team_project.politictalk.exception.NoContentException;
+import com.java_team_project.politictalk.json.request.RecallVoteRequest;
+import com.java_team_project.politictalk.model.recall.Recall;
+import com.java_team_project.politictalk.model.recall.RecallOpinionModel;
+import com.java_team_project.politictalk.model.recall.RecallOpinionRepository;
+import com.java_team_project.politictalk.model.recall.RecallRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @Api(value = "Recall", tags = "Recall")
 public class RecallVote {
-    @ApiOperation(value = "Approve Discontent", notes = "Vote Discontent")
+
+    @Autowired
+    RecallRepository recallRepository;
+
+    @ApiOperation(value = "Approve Recall", notes = "Vote Recall")
     @RequestMapping(value = "/recall/vote", method = RequestMethod.PATCH)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "discontentId", value = "Discontent Id", required = true, dataType = "string", paramType = "json")
-    })
-    public void approveDiscontent() {
-        /*
-        불만 게시글 찬성 DB 저장
-         */
+    public void approveRecallOpinion(@RequestBody @Valid RecallVoteRequest recallVoteRequest) {
+
+        Recall recall = recallRepository.findByRecallId(recallVoteRequest.getRecallId());
+        if(recall == null){
+            throw new NoContentException();
+        }
+
+        ArrayList<String> approve = recall.getApprove();
+        approve.add(recallVoteRequest.getUserId());
+        recallRepository.save(recall);
     }
 
-    @ApiOperation(value = "Disapprove Discontent", notes = "Vote Discontent")
+    @ApiOperation(value = "Disapprove Recall", notes = "Vote Recall")
     @RequestMapping(value = "/recall/vote", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "discontentId", value = "Discontent Id", required = true, dataType = "string", paramType = "json")
-    })
-    public void disapproveDiscontent() {
-        /*
-        불만 게시글 반대 db 저장
-         */
+    public void disapproveRecall(@RequestBody @Valid RecallVoteRequest recallVoteRequest) {
+
+        Recall recall = recallRepository.findByRecallId(recallVoteRequest.getRecallId());
+        if(recall == null){
+            throw new NoContentException();
+        }
+
+        ArrayList<String> disApprove = recall.getDisApprove();
+        disApprove.add(recallVoteRequest.getUserId());
+        recallRepository.save(recall);
     }
 }
