@@ -1,53 +1,68 @@
 package com.java_team_project.politictalk.controller.suggest_policy;
 
+import com.java_team_project.politictalk.exception.NoContentException;
+import com.java_team_project.politictalk.model.policy_suggestion.PolicySuggestion;
+import com.java_team_project.politictalk.model.policy_suggestion.PolicySuggestionRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
 @Api(value = "SuggestPolicy", tags = "SuggestPolicy")
 public class SuggestPolicyPost {
+
+    @Autowired
+    PolicySuggestionRepository repository;
+
     @ApiOperation(value = "Suggest Policy", notes = "Suggest Policy")
     @RequestMapping(value = "/suggest_policy", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "title", value = "Suggest Policy Title", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "content", value = "Suggest Policy Content", required = true, dataType = "string", paramType = "json"),
-            @ApiImplicitParam(name = "Committee", value = "Committee to Suggest Policy", required = true, dataType = "string", paramType = "json")
-    })
-    public UUID postSuggestPolicy() {
-        /*
-        정책 제안글 작성한 것을 DB에 저장 후 게시글의 id 리턴
-         */
-        UUID suggestPolicyId = UUID.randomUUID();
-        return suggestPolicyId;
+    public String postSuggestPolicy(@RequestBody @Valid PolicySuggestion policySuggestion) {
+
+        policySuggestion.init();
+        repository.save(policySuggestion);
+
+        return policySuggestion.getPolicySuggestionId();
     }
 
-    @ApiOperation(value = "Get Policy Suggestion List", notes = "Get Policy Suggestion List")
+    @ApiOperation(value = "Get Policy Suggestion List by Committee", notes = "Get Policy Suggestion List by Committee")
     @RequestMapping(value = "/suggest_policy/list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getPolicySuggestionList(@RequestParam String part) {
-        /*
-        정책 제안 글 분야별로 목록 리턴
-         */
-        HashMap<String, Object> map = new HashMap<>();
-        return map;
+    public List<PolicySuggestion> getPolicySuggestionList(@RequestParam String committee) {
+
+        List<PolicySuggestion> policySuggestions = repository.findAllByCommittee(committee);
+        if(policySuggestions == null || policySuggestions.size() == 0){
+            throw new NoContentException();
+        }
+
+        return policySuggestions;
     }
 
     @ApiOperation(value = "Get Policy Suggestion", notes = "Get Policy Suggestion")
     @RequestMapping(value = "/suggest_policy", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public HashMap<String, Object> getPolicySuggestion(@RequestParam String suggestPolicyId) {
-        /*
-        정책 제안 글 내용 리턴
-         */
-        HashMap<String, Object> map = new HashMap<>();
-        return map;
+    public PolicySuggestion getPolicySuggestion(@RequestParam String suggestPolicyId) {
+
+        PolicySuggestion policySuggestion = repository.findByPolicySuggestionId(suggestPolicyId);
+        if(policySuggestion == null){
+            throw new NoContentException();
+        }
+
+        return policySuggestion;
+    }
+
+    @ExceptionHandler(NoContentException.class)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void noContentException(){
+
     }
 }
