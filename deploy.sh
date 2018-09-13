@@ -1,4 +1,4 @@
-cd /home/ubuntu/Politic-Talk-Backend
+kill $(ps -ef |grep 'spring' | awk '{print $2}')
 git pull
 gradle build
-kill $(ps -ef |grep 'spring' | awk '{print $2}') && gradle bootRun
+gradle bootRun &
