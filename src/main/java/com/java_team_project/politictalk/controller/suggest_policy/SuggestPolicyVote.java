@@ -33,7 +33,12 @@ public class SuggestPolicyVote {
         }
 
         List<String> approve = policySuggestion.getAgree();
-        approve.add(suggestPolicyVoteRequest.getUserId());
+
+        String user = suggestPolicyVoteRequest.getUserId();
+        if(approve.contains(user))
+            approve.remove(user);
+        else
+            approve.add(user);
         repository.save(policySuggestion);
     }
 
@@ -51,7 +56,12 @@ public class SuggestPolicyVote {
         }
 
         List<String> disApprove = policySuggestion.getDisagree();
-        disApprove.add(suggestPolicyVoteRequest.getUserId());
+
+        String user = suggestPolicyVoteRequest.getUserId();
+        if(disApprove.contains(user))
+            disApprove.remove(user);
+        else
+            disApprove.add(user);
         repository.save(policySuggestion);
     }
 }

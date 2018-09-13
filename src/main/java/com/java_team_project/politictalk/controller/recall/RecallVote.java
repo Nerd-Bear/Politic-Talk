@@ -36,7 +36,12 @@ public class RecallVote {
         }
 
         ArrayList<String> approve = recall.getApprove();
-        approve.add(recallVoteRequest.getUserId());
+
+        String user = recallVoteRequest.getRecallId();
+        if(approve.contains(user))
+            approve.remove(user);
+        else
+            approve.add(user);
         recallRepository.save(recall);
     }
 
@@ -51,7 +56,12 @@ public class RecallVote {
         }
 
         ArrayList<String> disApprove = recall.getDisApprove();
-        disApprove.add(recallVoteRequest.getUserId());
+
+        String user = recallVoteRequest.getRecallId();
+        if(disApprove.contains(user))
+            disApprove.remove(user);
+        else
+            disApprove.add(user);
         recallRepository.save(recall);
     }
 }
