@@ -11,7 +11,12 @@ public class Hook {
     @RequestMapping(value = "/hook", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void hook() throws IOException {
-        Runtime rt = Runtime.getRuntime();
-        rt.exec("source /home/ubuntu/Politic-Talk-Backend/deploy.sh");
+
+        String[] command = {
+                "/bin/bash",
+                "-c",
+                "source /home/ubuntu/Politic-Talk-Backend/deploy.sh"
+        };
+        Runtime.getRuntime().exec(command);
     }
 }
