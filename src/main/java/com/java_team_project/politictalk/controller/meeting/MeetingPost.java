@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -18,11 +17,12 @@ import java.util.List;
 public class MeetingPost {
     @Autowired
     MeetingRepository meetingRepository;
+
     @ApiOperation(value = "Post Meeting", notes = "Post Meeting")
     @RequestMapping(value = "/meeting", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public String postMeeting(@RequestBody final Meeting meeting) {
-        if (meetingRepository.findByMeetingId(meeting.getMeetingId()) != null){
+        if (meetingRepository.findByMeetingId(meeting.getMeetingId()) != null) {
             throw new ExistIdException();
         }
         meetingRepository.save(meeting);
@@ -35,7 +35,7 @@ public class MeetingPost {
     public Meeting getMeeting(@RequestParam String meetingId) {
 
         Meeting meeting = meetingRepository.findByMeetingId(meetingId);
-        if(meeting == null){
+        if (meeting == null) {
             throw new NoContentException();
         }
 
@@ -48,7 +48,7 @@ public class MeetingPost {
     public List<Meeting> getMeetingList() {
 
         List<Meeting> meetings = meetingRepository.findAll();
-        if(meetings == null || meetings.size() == 0){
+        if (meetings == null || meetings.size() == 0) {
             throw new NoContentException();
         }
 
@@ -61,7 +61,7 @@ public class MeetingPost {
     public List<Meeting> getMeetingListByPoliticianId(@RequestParam String politicianId) {
 
         List<Meeting> meetings = meetingRepository.findByPoliticianId(politicianId);
-        if(meetings == null || meetings.size() == 0){
+        if (meetings == null || meetings.size() == 0) {
             throw new NoContentException();
         }
 
@@ -74,7 +74,7 @@ public class MeetingPost {
     public List<Meeting> getMeetingListByRegion(@RequestParam String region) {
 
         List<Meeting> meetings = meetingRepository.findByRegion(region);
-        if(meetings == null || meetings.size() == 0){
+        if (meetings == null || meetings.size() == 0) {
             throw new NoContentException();
         }
 
@@ -83,13 +83,13 @@ public class MeetingPost {
 
     @ExceptionHandler(ExistIdException.class)
     @ResponseStatus(HttpStatus.RESET_CONTENT)
-    public void ExistMeetingId(){
+    public void ExistMeetingId() {
 
     }
 
     @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void NonContent(){
+    public void NonContent() {
 
     }
 }

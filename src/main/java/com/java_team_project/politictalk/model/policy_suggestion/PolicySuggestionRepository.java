@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface PolicySuggestionRepository extends MongoRepository<PolicySuggestion, String> {
     List<PolicySuggestion> findAllByCommittee(String committee);
+
     PolicySuggestion findByPolicySuggestionId(String policySuggestionId);
 }

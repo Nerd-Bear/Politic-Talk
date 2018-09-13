@@ -28,14 +28,14 @@ public class SuggestPolicyVote {
     public void approvePolicySuggestion(@RequestBody @Valid SuggestPolicyVoteRequest suggestPolicyVoteRequest) {
 
         PolicySuggestion policySuggestion = repository.findByPolicySuggestionId(suggestPolicyVoteRequest.getPolicySuggestionId());
-        if(policySuggestion == null){
+        if (policySuggestion == null) {
             throw new NoContentException();
         }
 
         List<String> approve = policySuggestion.getAgree();
 
         String user = suggestPolicyVoteRequest.getUserId();
-        if(approve.contains(user))
+        if (approve.contains(user))
             approve.remove(user);
         else
             approve.add(user);
@@ -51,14 +51,14 @@ public class SuggestPolicyVote {
     public void disapprovePolicySuggestion(@RequestBody @Valid SuggestPolicyVoteRequest suggestPolicyVoteRequest) {
 
         PolicySuggestion policySuggestion = repository.findByPolicySuggestionId(suggestPolicyVoteRequest.getPolicySuggestionId());
-        if(policySuggestion == null){
+        if (policySuggestion == null) {
             throw new NoContentException();
         }
 
         List<String> disApprove = policySuggestion.getDisagree();
 
         String user = suggestPolicyVoteRequest.getUserId();
-        if(disApprove.contains(user))
+        if (disApprove.contains(user))
             disApprove.remove(user);
         else
             disApprove.add(user);

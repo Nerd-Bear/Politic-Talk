@@ -10,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @Api(value = "Recall", tags = "Recall")
@@ -38,7 +36,7 @@ public class RecallOpinion {
     public RecallOpinionModel getRecallOpinion(@RequestParam String recallOpinionId) {
 
         RecallOpinionModel recallOpinion = recallOpinionRepository.findByRecallOpinionId(recallOpinionId);
-        if(recallOpinion == null){
+        if (recallOpinion == null) {
             throw new NoContentException();
         }
 
@@ -51,7 +49,7 @@ public class RecallOpinion {
     public List<RecallOpinionModel> getRecallOpinionList(@RequestParam String recallId) {
 
         List<RecallOpinionModel> recallOpinionModels = recallOpinionRepository.findAllByRecallId(recallId);
-        if(recallOpinionModels == null || recallOpinionModels.size() == 0){
+        if (recallOpinionModels == null || recallOpinionModels.size() == 0) {
             throw new NoContentException();
         }
 
@@ -60,7 +58,7 @@ public class RecallOpinion {
 
     @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void noContentException(){
+    public void noContentException() {
 
     }
 }

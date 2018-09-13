@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface RecallRepository extends MongoRepository<Recall, String> {
     Recall findByRecallId(String recallId);
+
     List<Recall> findAllByPoliticianId(String politicianId);
 }

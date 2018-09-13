@@ -1,9 +1,5 @@
 package com.java_team_project.politictalk.model.recall;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,7 +20,7 @@ public class Recall {
     private ArrayList<String> approve;
     private ArrayList<String> disApprove;
 
-    public void init(){
+    public void init() {
         this.recallId = UUID.randomUUID().toString();
         this.date = new Date();
         this.viewCount = 0;

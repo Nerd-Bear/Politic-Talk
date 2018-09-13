@@ -1,6 +1,5 @@
 package com.java_team_project.politictalk.model.policy_suggestion;
 
-import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,7 +22,7 @@ public class PolicySuggestion {
     private String title;
     private String content;
 
-    public void init(){
+    public void init() {
         this.policySuggestionId = UUID.randomUUID().toString();
         this.agree = new ArrayList<String>();
         this.agree = new ArrayList<String>();

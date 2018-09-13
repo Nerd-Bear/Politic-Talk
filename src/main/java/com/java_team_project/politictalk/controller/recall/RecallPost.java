@@ -4,17 +4,13 @@ import com.java_team_project.politictalk.exception.NoContentException;
 import com.java_team_project.politictalk.model.recall.Recall;
 import com.java_team_project.politictalk.model.recall.RecallRepository;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @Api(value = "Recall", tags = "Recall")
@@ -40,7 +36,7 @@ public class RecallPost {
     public Recall getRecall(@RequestParam String recallId) {
 
         Recall recall = recallRepository.findByRecallId(recallId);
-        if(recall == null){
+        if (recall == null) {
             throw new NoContentException();
         }
 
@@ -53,7 +49,7 @@ public class RecallPost {
     public List<Recall> getRecallList() {
 
         List<Recall> recalls = recallRepository.findAll();
-        if(recalls == null || recalls.size() == 0){
+        if (recalls == null || recalls.size() == 0) {
             throw new NoContentException();
         }
 
@@ -66,7 +62,7 @@ public class RecallPost {
     public List<Recall> getRecallListByPoliticianId(@RequestParam String politicianId) {
 
         List<Recall> recalls = recallRepository.findAllByPoliticianId(politicianId);
-        if(recalls == null || recalls.size() == 0){
+        if (recalls == null || recalls.size() == 0) {
             throw new NoContentException();
         }
 
@@ -75,7 +71,7 @@ public class RecallPost {
 
     @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void noContentException(){
+    public void noContentException() {
 
     }
 }

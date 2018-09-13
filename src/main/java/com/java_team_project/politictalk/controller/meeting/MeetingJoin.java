@@ -32,12 +32,12 @@ public class MeetingJoin {
 
         Account user = accountRepository.findByUserId(meetingJoinRequest.getUserId());
         Meeting meeting = meetingRepository.findByMeetingId(meetingJoinRequest.getMeetingId());
-        if(user == null || meeting == null){
+        if (user == null || meeting == null) {
             throw new NoContentException();
         }
 
         List<String> participants = meeting.getParticipantId();
-        if(participants.contains(user.getUserId())){
+        if (participants.contains(user.getUserId())) {
             throw new ResetContentException();
         }
 
@@ -53,12 +53,12 @@ public class MeetingJoin {
 
         Account user = accountRepository.findByUserId(meetingJoinRequest.getUserId());
         Meeting meeting = meetingRepository.findByMeetingId(meetingJoinRequest.getMeetingId());
-        if(user == null || meeting == null){
+        if (user == null || meeting == null) {
             throw new NoContentException();
         }
 
         List<String> participants = meeting.getParticipantId();
-        if(!participants.contains(user.getUserId())){
+        if (!participants.contains(user.getUserId())) {
             throw new ResetContentException();
         }
 
@@ -69,13 +69,13 @@ public class MeetingJoin {
 
     @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void noUserIdOrNoMeetingId(){
+    public void noUserIdOrNoMeetingId() {
 
     }
 
     @ExceptionHandler(ResetContentException.class)
     @ResponseStatus(HttpStatus.RESET_CONTENT)
-    public void alreadyJoinedOrAlreadyQuited(){
+    public void alreadyJoinedOrAlreadyQuited() {
 
     }
 }

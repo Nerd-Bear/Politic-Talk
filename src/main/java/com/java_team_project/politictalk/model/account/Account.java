@@ -1,6 +1,5 @@
 package com.java_team_project.politictalk.model.account;
 
-import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

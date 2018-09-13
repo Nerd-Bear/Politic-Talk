@@ -4,17 +4,13 @@ import com.java_team_project.politictalk.exception.NoContentException;
 import com.java_team_project.politictalk.model.policy_suggestion.PolicySuggestion;
 import com.java_team_project.politictalk.model.policy_suggestion.PolicySuggestionRepository;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @Api(value = "SuggestPolicy", tags = "SuggestPolicy")
@@ -40,7 +36,7 @@ public class SuggestPolicyPost {
     public List<PolicySuggestion> getPolicySuggestionList(@RequestParam String committee) {
 
         List<PolicySuggestion> policySuggestions = repository.findAllByCommittee(committee);
-        if(policySuggestions == null || policySuggestions.size() == 0){
+        if (policySuggestions == null || policySuggestions.size() == 0) {
             throw new NoContentException();
         }
 
@@ -53,7 +49,7 @@ public class SuggestPolicyPost {
     public PolicySuggestion getPolicySuggestion(@RequestParam String suggestPolicyId) {
 
         PolicySuggestion policySuggestion = repository.findByPolicySuggestionId(suggestPolicyId);
-        if(policySuggestion == null){
+        if (policySuggestion == null) {
             throw new NoContentException();
         }
 
@@ -62,7 +58,7 @@ public class SuggestPolicyPost {
 
     @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void noContentException(){
+    public void noContentException() {
 
     }
 }

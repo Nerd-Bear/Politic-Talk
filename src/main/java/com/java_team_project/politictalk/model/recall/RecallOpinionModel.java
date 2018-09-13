@@ -3,9 +3,7 @@ package com.java_team_project.politictalk.model.recall;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Document(collection = "recall_opinion")
@@ -19,7 +17,7 @@ public class RecallOpinionModel {
     private int viewCount;
     private String recallId;
 
-    public void init(){
+    public void init() {
         this.recallOpinionId = UUID.randomUUID().toString();
         this.date = new Date();
         this.viewCount = 0;

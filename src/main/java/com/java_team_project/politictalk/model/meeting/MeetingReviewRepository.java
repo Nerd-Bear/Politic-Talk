@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface MeetingReviewRepository extends MongoRepository<MeetingReview, String> {
     List<MeetingReview> findAllByPoliticianId(String politicianId);
+
     List<MeetingReview> findAllByMeetingId(String meetingId);
+
     MeetingReview findByMeetingReviewId(String meetingReviewId);
 }

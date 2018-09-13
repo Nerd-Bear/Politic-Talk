@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,7 +40,7 @@ public class MeetingReview {
     public List<com.java_team_project.politictalk.model.meeting.MeetingReview> getMeetingReviewList() {
 
         List<com.java_team_project.politictalk.model.meeting.MeetingReview> meetingReviews = meetingReviewRepository.findAll();
-        if(meetingReviews == null || meetingReviews.size() == 0){
+        if (meetingReviews == null || meetingReviews.size() == 0) {
             throw new NoContentException();
         }
 
@@ -54,7 +53,7 @@ public class MeetingReview {
     public List<com.java_team_project.politictalk.model.meeting.MeetingReview> getMeetingReviewListByPolitianId(@RequestParam String politicianId) {
 
         List<com.java_team_project.politictalk.model.meeting.MeetingReview> meetingReviews = meetingReviewRepository.findAllByPoliticianId(politicianId);
-        if(meetingReviews == null || meetingReviews.size() == 0){
+        if (meetingReviews == null || meetingReviews.size() == 0) {
             throw new NoContentException();
         }
 
@@ -67,7 +66,7 @@ public class MeetingReview {
     public List<com.java_team_project.politictalk.model.meeting.MeetingReview> getMeetingReviewListByMeetingId(@RequestParam String meetingId) {
 
         List<com.java_team_project.politictalk.model.meeting.MeetingReview> meetingReviews = meetingReviewRepository.findAllByMeetingId(meetingId);
-        if(meetingReviews == null || meetingReviews.size() == 0){
+        if (meetingReviews == null || meetingReviews.size() == 0) {
             throw new NoContentException();
         }
 
@@ -80,7 +79,7 @@ public class MeetingReview {
     public com.java_team_project.politictalk.model.meeting.MeetingReview getMeetingReview(@RequestParam String meetingReviewId) {
 
         com.java_team_project.politictalk.model.meeting.MeetingReview meetingReview = meetingReviewRepository.findByMeetingReviewId(meetingReviewId);
-        if(meetingReview == null){
+        if (meetingReview == null) {
             throw new NoContentException();
         }
 
@@ -89,7 +88,7 @@ public class MeetingReview {
 
     @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void noContentException(){
+    public void noContentException() {
 
     }
 }
