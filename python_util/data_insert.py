@@ -14,5 +14,8 @@ for file_name in data_files:
         print(file_name)
 
         num = int(file_name[9]) if file_name[9] != '1' else int(file_name[9:11])
-        collection = db[collections[num]]
-        collection.insert_many(json.loads(f.read()))
+        collection = db['politician']
+        data = json.loads(f.read())
+        for a in data:
+            a['position'] = collections[num]
+        collection.insert_many(data)

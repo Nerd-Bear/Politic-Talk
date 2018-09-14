@@ -35,7 +35,7 @@ public class SuggestPolicyOpinion {
     @ResponseStatus(HttpStatus.OK)
     public PolicySuggestionOpinion getPolicySuggestOpinion(@RequestParam String suggestPolicyOpinionId) {
 
-        PolicySuggestionOpinion policySuggestionOpinion = repository.findBySuggestPolicyOpinionId();
+        PolicySuggestionOpinion policySuggestionOpinion = repository.findBySuggestPolicyOpinionId(suggestPolicyOpinionId);
         if(policySuggestionOpinion == null){
             throw new NoContentException();
         }
