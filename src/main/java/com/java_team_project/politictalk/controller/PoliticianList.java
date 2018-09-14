@@ -1,30 +1,43 @@
 package com.java_team_project.politictalk.controller;
 
+import com.java_team_project.politictalk.exception.NoContentException;
+import com.java_team_project.politictalk.model.politician.Politician;
+import com.java_team_project.politictalk.model.politician.PoliticianRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @Api(value = "Politician List", tags = "Politician List")
 public class PoliticianList {
+    @Autowired
+    PoliticianRepository repository;
+
     @ApiOperation(value = "Get Politician List", notes = "Get Politician List")
-    @RequestMapping(value = "/recall/politician List", method = RequestMethod.GET)
+    @RequestMapping(value = "/politician/list", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "region", value = "politician region", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "position", value = "politician position", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "name", value = "politician name", required = false, dataType = "String", paramType = "query")
-    })
-    public HashMap<String, Object> getPoliticians(@RequestParam String region, @RequestParam String position, @RequestParam String name) {
-        /*
-        정치인 목록을 DB에서 끌어와 리스폰스 해줌
-         */
-        HashMap<String, Object> politicianList = new HashMap<>();
-        return politicianList;
+    public List<Politician> getPoliticians(@RequestParam String region,
+                                           @RequestParam String position,
+                                           @RequestParam String name) {
+
+        List<Politician> politicians = repository.findAllByRegion1AndPosition(region, position);
+        if (politicians == null || politicians.size() == 0){
+            throw new NoContentException();
+        }
+
+        return politicians;
+    }
+
+    @ExceptionHandler(NoContentException.class)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void noContenetException(){
+
     }
 }
