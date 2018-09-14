@@ -3,6 +3,17 @@ from selenium import webdriver
 import time
 import json
 
+key_dict = {'선거구명': 'vote_region',
+            '정당명': 'party',
+            '성별': 'sex',
+            '주소': 'address',
+            '직업': 'job',
+            '학력': 'education',
+            '득표수(득표율)': 'votes',
+            '구시군명': 'region2',
+            '추천순위': 'recommend',
+            '시도명': 'region'}
+
 
 def crawl(num, city_name='none'):
     driver.find_element_by_xpath('//*[@id="spanSubmit"]/input').click()
@@ -20,17 +31,17 @@ def crawl(num, city_name='none'):
 
         for key, td in zip(keys, tds):
             if key == '사진':
-                temp[key] = 'http://info.nec.go.kr' + td.find('input')['src']
+                temp['photo'] = 'http://info.nec.go.kr' + td.find('input')['src']
             elif key == '성명(한자)':
-                temp['성명'] = td.text.split('(')[0].replace('\t', '').replace('\n', '')
+                temp['name'] = td.text.split('(')[0].replace('\t', '').replace('\n', '')
             elif key == '생년월일(연령)':
-                temp['생년월일'] = td.text.split('(')[0].replace('\t', '').replace('\n', '')
+                temp['birthDay'] = td.text.split('(')[0].replace('\t', '').replace('\n', '')
             elif key == '경력':
-                temp[key] = td.text.replace('(', '\n(').split('\n')[1:]
+                temp['career'] = td.text.replace('(', '\n(').split('\n')[1:]
             else:
-                temp[key] = td.text
+                temp[key_dict[key]] = td.text
 
-        temp['시도명'] = city_name
+        temp['region1'] = city_name
         result.append(temp)
     with open('politic_man_data\\info_nec_{}_{}'.format(num, city_name), 'w', encoding='UTF-8') as f:
         f.write(json.dumps(result))

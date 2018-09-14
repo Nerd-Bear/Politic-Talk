@@ -9,9 +9,18 @@ import java.util.ArrayList;
 @Document(collection = "politician")
 public class Politician {
     private String name;
+    private String vote_region;
+    private String party;
+    private String photo;
+    private String sex;
+    private String bityhDay;
+    private String address;
+    private String job;
+    private String education;
+    private ArrayList<String> career;
+    private String region1;
     private String position;
-    private String region;
-    private ArrayList<String> pledge;
-    private String email;
-    private String number;
+    private String votes;
+    private String region2;
+    private String recommend;
 }
