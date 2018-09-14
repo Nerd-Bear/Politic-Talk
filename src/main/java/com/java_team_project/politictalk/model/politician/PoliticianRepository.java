@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PoliticianRepository extends MongoRepository<Politician, String> {
     List<Politician> findAllByRegion1AndPosition(String region1, String position);
+
+    List<Politician> findAllByRegion1AndPositionAndName(String region1, String position, String name);
 }
