@@ -25,9 +25,9 @@ public class PoliticianList {
                                            @RequestParam String name) {
         List<Politician> politicians;
         if (name.equals("null")) {
-            politicians = repository.findAllByRegion1AndPosition(region, position);
+            politicians = repository.findAllByRegionAndPosition(region, position);
         } else {
-            politicians = repository.findAllByRegion1AndPositionAndName(region, position, name);
+            politicians = repository.findAllByRegionAndPositionAndName(region, position, name);
         }
 
         if (politicians == null || politicians.size() == 0) {

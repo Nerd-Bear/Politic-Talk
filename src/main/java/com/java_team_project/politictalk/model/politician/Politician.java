@@ -18,9 +18,8 @@ public class Politician {
     private String job;
     private String education;
     private ArrayList<String> career;
-    private String region1;
+    private String region;
     private String position;
     private String votes;
-    private String region2;
     private String recommend;
 }

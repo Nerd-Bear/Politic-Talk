@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface PoliticianRepository extends MongoRepository<Politician, String> {
-    List<Politician> findAllByRegion1AndPosition(String region1, String position);
+    List<Politician> findAllByRegionAndPosition(String region, String position);
 
-    List<Politician> findAllByRegion1AndPositionAndName(String region1, String position, String name);
+    List<Politician> findAllByRegionAndPositionAndName(String region, String position, String name);
 }
