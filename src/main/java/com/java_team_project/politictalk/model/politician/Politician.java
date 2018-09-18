@@ -1,6 +1,7 @@
 package com.java_team_project.politictalk.model.politician;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -8,12 +9,13 @@ import java.util.ArrayList;
 @Data
 @Document(collection = "politician")
 public class Politician {
+    @Id
+    private String politicianId;
     private String name;
-    private String vote_region;
     private String party;
     private String photo;
     private String sex;
-    private String bityhDay;
+    private String birthDay;
     private String address;
     private String job;
     private String education;

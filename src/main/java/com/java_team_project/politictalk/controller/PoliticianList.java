@@ -24,10 +24,14 @@ public class PoliticianList {
                                            @RequestParam String position,
                                            @RequestParam String name) {
         List<Politician> politicians;
-        if (name.equals("null")) {
-            politicians = repository.findAllByRegionAndPosition(region, position);
+        if (name.equals("null") && position.equals("null")) {
+            politicians = repository.findAllByRegionContaining(region);
+        } else if(name.equals("null")){
+            politicians = repository.findAllByRegionContainingAndPosition(region, position);
+        } else if (position.equals("null")) {
+            politicians = repository.findAllByRegionContainingAndName(region, name);
         } else {
-            politicians = repository.findAllByRegionAndPositionAndName(region, position, name);
+            politicians = repository.findAllByRegionContainingAndPositionAndName(region, position, name);
         }
 
         if (politicians == null || politicians.size() == 0) {
@@ -35,6 +39,19 @@ public class PoliticianList {
         }
 
         return politicians;
+    }
+
+    @ApiOperation(value = "Get Politician",notes = "Get Politician")
+    @RequestMapping(value = "/politician", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Politician getPolitician(@RequestParam String politicianId){
+
+        Politician politician = repository.findByPoliticianId(politicianId);
+        if(politician == null){
+            throw new NoContentException();
+        }
+
+        return politician;
     }
 
     @ExceptionHandler(NoContentException.class)

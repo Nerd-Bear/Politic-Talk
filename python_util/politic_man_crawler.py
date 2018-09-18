@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import time
 import json
+from bson.objectid import ObjectId
 
-key_dict = {'선거구명': 'vote_region',
-            '정당명': 'party',
+key_dict = {'정당명': 'party',
             '성별': 'sex',
             '주소': 'address',
             '직업': 'job',
@@ -37,14 +37,16 @@ def crawl(num, city_name='none'):
                 temp['birthDay'] = td.text.split('(')[0].replace('\t', '').replace('\n', '')
             elif key == '경력':
                 temp['career'] = td.text.replace('(', '\n(').split('\n')[1:]
-            elif key == '구시군명':
-                temp['region'] += ' ' + td.text
-            elif key == '시도명':
+            elif key == '선거구명':
+                if temp['region'] != td.text:
+                    temp['region'] += ' ' + td.text
+            elif key in ['시도명', '구시군명']:
                 pass
             else:
                 temp[key_dict[key]] = td.text
 
         temp['region1'] = city_name
+        temp['_id'] = str(ObjectId())
         result.append(temp)
     with open('politic_man_data\\info_nec_{}_{}'.format(num, city_name), 'w', encoding='UTF-8') as f:
         f.write(json.dumps(result))
