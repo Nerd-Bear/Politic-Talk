@@ -18,4 +18,5 @@ for file_name in data_files:
         data = json.loads(f.read())
         for a in data:
             a['position'] = collections[num]
+            a['_id'] = 'a' + collection['_id']
         collection.insert_many(data)

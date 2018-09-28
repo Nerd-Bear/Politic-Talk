@@ -26,6 +26,7 @@ public class SuggestPolicyOpinion {
     @ResponseStatus(HttpStatus.CREATED)
     public String policySuggestOpinion(@RequestBody @Valid PolicySuggestionOpinion policySuggestionOpinion) {
 
+        policySuggestionOpinion.init();
         repository.save(policySuggestionOpinion);
         return policySuggestionOpinion.getSuggestPolicyOpinionId();
     }

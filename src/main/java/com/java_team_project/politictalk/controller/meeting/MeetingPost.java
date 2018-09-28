@@ -25,6 +25,8 @@ public class MeetingPost {
         if (meetingRepository.findByMeetingId(meeting.getMeetingId()) != null) {
             throw new ExistIdException();
         }
+
+        meeting.init();
         meetingRepository.save(meeting);
         return meeting.getMeetingId();
     }

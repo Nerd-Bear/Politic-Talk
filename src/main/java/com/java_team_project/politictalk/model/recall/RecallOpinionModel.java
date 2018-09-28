@@ -20,7 +20,7 @@ public class RecallOpinionModel {
     private String recallId;
 
     public void init() {
-        this.recallOpinionId = UUID.randomUUID().toString();
+        this.recallOpinionId = "a" + UUID.randomUUID().toString();
         this.date = new Date();
         this.viewCount = 0;
     }

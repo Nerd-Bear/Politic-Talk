@@ -20,7 +20,7 @@ public class PolicySuggestionOpinion {
     private String policySuggestionId;
 
     public void init(){
-        this.suggestPolicyOpinionId = UUID.randomUUID().toString();
+        this.suggestPolicyOpinionId = "a" + UUID.randomUUID().toString();
         this.date = new Date();
         this.viewCount = 0;
     }

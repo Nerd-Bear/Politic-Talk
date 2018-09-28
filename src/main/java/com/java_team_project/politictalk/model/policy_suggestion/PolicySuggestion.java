@@ -25,7 +25,7 @@ public class PolicySuggestion {
     private String content;
 
     public void init() {
-        this.policySuggestionId = UUID.randomUUID().toString();
+        this.policySuggestionId = "a" + UUID.randomUUID().toString();
         this.agree = new ArrayList<String>();
         this.agree = new ArrayList<String>();
         this.didPolicianRead = false;

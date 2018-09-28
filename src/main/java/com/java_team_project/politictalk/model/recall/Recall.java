@@ -23,7 +23,7 @@ public class Recall {
     private ArrayList<String> disApprove;
 
     public void init() {
-        this.recallId = UUID.randomUUID().toString();
+        this.recallId = "a" + UUID.randomUUID().toString();
         this.date = new Date();
         this.viewCount = 0;
 

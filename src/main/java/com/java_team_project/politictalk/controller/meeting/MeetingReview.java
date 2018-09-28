@@ -23,7 +23,7 @@ public class MeetingReview {
     @RequestMapping(value = "/meeting/review", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public String postMeetingReview(@RequestBody com.java_team_project.politictalk.model.meeting.MeetingReview meetingReview) {
-        String meetingReviewId = UUID.randomUUID().toString();
+        String meetingReviewId = "a" + UUID.randomUUID().toString();
 
         meetingReview.setDate(new Date());
         meetingReview.setMeetingId(meetingReviewId);

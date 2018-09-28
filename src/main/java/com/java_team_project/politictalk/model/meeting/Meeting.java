@@ -25,7 +25,7 @@ public class Meeting {
     private String region;
 
     public void init(){
-        this.meetingId = UUID.randomUUID().toString();
+        this.meetingId = "a" + UUID.randomUUID().toString();
         this.date = new Date();
         this.viewCount = 0;
         this.participantId = new ArrayList<String>();
