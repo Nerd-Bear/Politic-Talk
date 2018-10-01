@@ -25,7 +25,7 @@ public class SuggestPolicyVote {
     @ApiOperation(value = "Approve Policy Suggestion", notes = "Vote Policy Suggestion")
     @RequestMapping(value = "/suggest_policy/vote", method = RequestMethod.PATCH)
     @ResponseStatus(HttpStatus.CREATED)
-    public void approvePolicySuggestion(@RequestBody @Valid SuggestPolicyVoteRequest suggestPolicyVoteRequest) {
+    public String approvePolicySuggestion(@RequestBody @Valid SuggestPolicyVoteRequest suggestPolicyVoteRequest) {
 
         PolicySuggestion policySuggestion = repository.findByPolicySuggestionId(suggestPolicyVoteRequest.getPolicySuggestionId());
         if (policySuggestion == null) {
@@ -35,11 +35,18 @@ public class SuggestPolicyVote {
         List<String> approve = policySuggestion.getAgree();
 
         String user = suggestPolicyVoteRequest.getUserId();
-        if (approve.contains(user))
+        String result;
+        if (approve.contains(user)){
             approve.remove(user);
-        else
+            result = "canceled";
+        } else {
             approve.add(user);
+            result = "success";
+        }
+
         repository.save(policySuggestion);
+
+        return result;
     }
 
     @ApiOperation(value = "Dispprove Policy Suggestion", notes = "Vote Policy Suggestion")
@@ -48,7 +55,7 @@ public class SuggestPolicyVote {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "suggestPolicyId", value = "SuggestPolicy Id", required = true, dataType = "string", paramType = "json")
     })
-    public void disapprovePolicySuggestion(@RequestBody @Valid SuggestPolicyVoteRequest suggestPolicyVoteRequest) {
+    public String disapprovePolicySuggestion(@RequestBody @Valid SuggestPolicyVoteRequest suggestPolicyVoteRequest) {
 
         PolicySuggestion policySuggestion = repository.findByPolicySuggestionId(suggestPolicyVoteRequest.getPolicySuggestionId());
         if (policySuggestion == null) {
@@ -58,10 +65,17 @@ public class SuggestPolicyVote {
         List<String> disApprove = policySuggestion.getDisagree();
 
         String user = suggestPolicyVoteRequest.getUserId();
-        if (disApprove.contains(user))
+        String result;
+        if (disApprove.contains(user)){
             disApprove.remove(user);
-        else
+            result = "canceled";
+        } else {
             disApprove.add(user);
+            result = "success";
+        }
+
         repository.save(policySuggestion);
+
+        return result;
     }
 }

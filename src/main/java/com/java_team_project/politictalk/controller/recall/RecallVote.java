@@ -23,7 +23,7 @@ public class RecallVote {
     @ApiOperation(value = "Approve Recall", notes = "Vote Recall")
     @RequestMapping(value = "/recall/vote", method = RequestMethod.PATCH)
     @ResponseStatus(HttpStatus.CREATED)
-    public void approveRecallOpinion(@RequestBody @Valid RecallVoteRequest recallVoteRequest) {
+    public String approveRecallOpinion(@RequestBody @Valid RecallVoteRequest recallVoteRequest) {
 
         Recall recall = recallRepository.findByRecallId(recallVoteRequest.getRecallId());
         if (recall == null) {
@@ -33,17 +33,24 @@ public class RecallVote {
         ArrayList<String> approve = recall.getApprove();
 
         String user = recallVoteRequest.getRecallId();
-        if (approve.contains(user))
+        String result;
+        if (approve.contains(user)){
             approve.remove(user);
-        else
+            result = "canceled";
+        } else {
             approve.add(user);
+            result = "success";
+        }
+
         recallRepository.save(recall);
+
+        return result;
     }
 
     @ApiOperation(value = "Disapprove Recall", notes = "Vote Recall")
     @RequestMapping(value = "/recall/vote", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void disapproveRecall(@RequestBody @Valid RecallVoteRequest recallVoteRequest) {
+    public String disapproveRecall(@RequestBody @Valid RecallVoteRequest recallVoteRequest) {
 
         Recall recall = recallRepository.findByRecallId(recallVoteRequest.getRecallId());
         if (recall == null) {
@@ -53,10 +60,15 @@ public class RecallVote {
         ArrayList<String> disApprove = recall.getDisApprove();
 
         String user = recallVoteRequest.getRecallId();
-        if (disApprove.contains(user))
+        String result;
+        if (disApprove.contains(user)){
             disApprove.remove(user);
-        else
+            result = "canceled";
+        } else {
             disApprove.add(user);
+            result = "success";
+        }
         recallRepository.save(recall);
+        return result;
     }
 }

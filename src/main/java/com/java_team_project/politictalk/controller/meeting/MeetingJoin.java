@@ -28,7 +28,7 @@ public class MeetingJoin {
     @ApiOperation(value = "Join Meeting", notes = "Join Meeting")
     @RequestMapping(value = "/meeting/join", method = RequestMethod.PATCH)
     @ResponseStatus(HttpStatus.CREATED)
-    public void joinMeeting(@RequestBody MeetingJoinRequest meetingJoinRequest) {
+    public String joinMeeting(@RequestBody MeetingJoinRequest meetingJoinRequest) {
 
         Account user = accountRepository.findByUserId(meetingJoinRequest.getUserId());
         Meeting meeting = meetingRepository.findByMeetingId(meetingJoinRequest.getMeetingId());
@@ -36,15 +36,19 @@ public class MeetingJoin {
             throw new NoContentException();
         }
 
+        String result;
         List<String> participants = meeting.getParticipantId();
         if (participants.contains(user.getUserId())) {
             participants.remove(user.getUserId());
+            result = "canceled";
         } else {
             participants.add(user.getUserId());
+            result = "success";
         }
 
         meetingRepository.save(meeting);
 
+        return result;
     }
 
     @ExceptionHandler(ResetContentException.class)
